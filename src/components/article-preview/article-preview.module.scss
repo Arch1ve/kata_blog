@@ -1,0 +1,102 @@
+@import '../../scss/variables.scss';
+
+.content {
+  width: 660px;
+}
+
+.title-area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  max-width: 655px;
+}
+
+.title {
+  word-wrap: break-word;
+  max-width: 610px;
+  font-size: 20px;
+  line-height: 28px;
+  margin-right: 13px;
+  font-weight: 400;
+  color: $info-color;
+}
+
+.likes {
+  border: none;
+  width: 16px;
+  height: 15px;
+  cursor: pointer;
+  background-color: inherit;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 5px;
+
+  &--unchecked {
+    background-image: url('../../../public/img/heart-empty.svg');
+  }
+
+  &--unchecked:hover {
+    background-image: url('../../../public/img/heart-red.svg');
+  }
+
+  &--checked {
+    background-image: url('../../../public/img/heart-red.svg');
+  }
+
+  &--checked:hover {
+    background-image: url('../../../public/img/heart-empty.svg');
+  }
+}
+
+.tag-list {
+  display: flex;
+  margin-bottom: 4px;
+  color: $text-color-secondary;
+
+  &--article {
+    margin-bottom: 16px;
+  }
+}
+
+.tag {
+  font-size: $font-size-sm;
+  border: 1px solid $text-color-secondary;
+  padding: 2px 5px 3px;
+  border-radius: 2px;
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+.text {
+  line-height: 22px;
+}
+
+.description {
+  display: flex;
+}
+
+.description-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 12px;
+}
+
+.profile-title {
+  color: $heading-color;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.date {
+  color: $text-color-secondary;
+}
+
+.profile-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}

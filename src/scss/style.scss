@@ -1,0 +1,43 @@
+@import 'null';
+@import './variables.scss';
+
+body {
+  background-color: #EBEEF3;
+  color: $text-color;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 76px;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 64px;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h5 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+h6 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}

@@ -1,0 +1,66 @@
+import React, { FC, memo, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { useParams } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import IArticlePreview from '../../models/IArticlePreview'
+import { fetchSingleArticle } from '../../store/reducers/actionCreators'
+import ArticlePreview from '../article-preview/article-preview'
+
+import styles from './article.module.scss'
+
+const Article: FC = () => {
+  const { slug } = useParams<{ slug: string }>()
+  const dispatch = useAppDispatch()
+  const currentArticle = useAppSelector((state) => state.articles.currentArticle)
+  const { loading } = useAppSelector((state) => state.articles)
+
+  useEffect(() => {
+    dispatch(fetchSingleArticle(slug))
+  }, [])
+
+  let artcileContent = null
+  if (currentArticle) {
+    const {
+      slug,
+      title,
+      description,
+      updatedAt: date,
+      tagList,
+      favorited,
+      favoritesCount: likes,
+      author,
+      body,
+    } = currentArticle
+    const data: IArticlePreview = {
+      slug,
+      title,
+      description,
+      date,
+      tagList,
+      favorited,
+      likes,
+      author: { username: author.username, image: author.image },
+    }
+
+    artcileContent = (
+      <>
+        <header className={styles.header}>
+          <ArticlePreview data={data} header={true} />
+        </header>
+        <div className={styles.content}>
+          <ReactMarkdown>{body}</ReactMarkdown>
+        </div>
+      </>
+    )
+  }
+
+  return (
+    <article className={styles.article}>
+      {loading && <h1>Loading</h1>}
+      {!loading && artcileContent}
+    </article>
+  )
+}
+
+export default memo(Article)
