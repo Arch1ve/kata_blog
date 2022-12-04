@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import IArticlePreview from '../../models/IArticlePreview'
 import { fetchSingleArticle } from '../../store/reducers/actionCreators'
 import ArticlePreview from '../article-preview/article-preview'
+import Loader from '../loader/loader'
 
 import styles from './article.module.scss'
 
@@ -57,7 +58,7 @@ const Article: FC = () => {
 
   return (
     <article className={styles.article}>
-      {loading && <h1>Loading</h1>}
+      {loading && <Loader />}
       {!loading && artcileContent}
     </article>
   )
