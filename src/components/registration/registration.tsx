@@ -1,11 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
 import styles from '../../scss/registration.module.scss'
+import { registerUser } from '../../store/reducers/actionCreators'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { setUserError } from '../../store/reducers/userSlice'
 
-type FormData = {
+interface FormData {
   username: string
   mail: string
   pass: string
@@ -14,6 +17,8 @@ type FormData = {
 }
 
 const Registration: FC = () => {
+  const dispatch = useAppDispatch()
+  const { error: registerError } = useAppSelector((state) => state.user)
   const {
     register,
     handleSubmit,
@@ -21,8 +26,14 @@ const Registration: FC = () => {
     watch,
   } = useForm<FormData>({ mode: 'onBlur' })
 
-  const onSubmit = (data: object) => {
-    console.log(data)
+  useEffect(() => {
+    return () => {
+      dispatch(setUserError({}))
+    }
+  }, [])
+
+  const onSubmit = (data: FormData) => {
+    dispatch(registerUser(data.username, data.mail, data.pass))
   }
 
   const mailValidation = (email: string): boolean => {
@@ -53,6 +64,9 @@ const Registration: FC = () => {
               })}
             />
             {errors?.username && <p className={styles['error-message']}>{errors?.username.message}</p>}
+            {registerError?.username && !errors?.username && (
+              <p className={styles['error-message']}>This username {registerError?.username}</p>
+            )}
           </label>
           <label className={styles.label}>
             Email address
@@ -67,6 +81,9 @@ const Registration: FC = () => {
             />
             {errors?.mail && (
               <p className={styles['error-message']}>{errors?.mail.message || 'Enter correct email address'}</p>
+            )}
+            {registerError?.email && !errors?.mail && (
+              <p className={styles['error-message']}>This email {registerError?.email}</p>
             )}
           </label>
           <label className={styles.label}>
@@ -113,7 +130,7 @@ const Registration: FC = () => {
         </button>
         <div className={styles.redirect}>
           Already have an account?{' '}
-          <Link className={styles['redirect-link']} to="sign-in">
+          <Link className={styles['redirect-link']} to="/sign-in">
             Sign In.
           </Link>
         </div>

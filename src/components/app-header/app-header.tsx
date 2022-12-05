@@ -7,9 +7,11 @@ const AppHeader: FC = () => {
   return (
     <header className={styles.header}>
       <Link to="/">Realworld Blog</Link>
-      <div>
+      <div className={styles['link-area']}>
         <Link to="sign-in">Sign In</Link>
-        <Link to="sign-up">Sign Up</Link>
+        <Link to="sign-up" className={styles['sign-up']}>
+          Sign Up
+        </Link>
       </div>
     </header>
   )

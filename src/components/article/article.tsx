@@ -13,11 +13,11 @@ import styles from './article.module.scss'
 const Article: FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const dispatch = useAppDispatch()
-  const currentArticle = useAppSelector((state) => state.articles.currentArticle)
-  const { loading } = useAppSelector((state) => state.articles)
+  const { loading, currentArticle } = useAppSelector((state) => state.articles)
+  const { token } = useAppSelector((state) => state.user.user)
 
   useEffect(() => {
-    dispatch(fetchSingleArticle(slug))
+    dispatch(fetchSingleArticle(slug, token))
   }, [])
 
   let artcileContent = null

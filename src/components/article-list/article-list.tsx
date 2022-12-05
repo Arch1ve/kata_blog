@@ -12,10 +12,11 @@ import styles from './article-list.module.scss'
 const CardList: FC = () => {
   const dispatch = useAppDispatch()
   const { articles, loading } = useAppSelector((state) => state.articles)
+  const { token } = useAppSelector((state) => state.user.user)
   const [pages, setPages] = useState(0)
 
   useEffect(() => {
-    dispatch(fetchArticles(false, pages * 5))
+    dispatch(fetchArticles(pages * 5, token))
   }, [pages])
 
   const items = articles.map(
