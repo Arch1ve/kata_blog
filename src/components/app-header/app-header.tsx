@@ -8,8 +8,8 @@ const AppHeader: FC = () => {
     <header className={styles.header}>
       <Link to="/">Realworld Blog</Link>
       <div>
-        <button>Sign In</button>
-        <button>Sign Up</button>
+        <Link to="sign-in">Sign In</Link>
+        <Link to="sign-up">Sign Up</Link>
       </div>
     </header>
   )

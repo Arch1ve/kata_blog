@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import 'null';
 @import './variables.scss';
 
 body {
   background-color: #EBEEF3;
   color: $text-color;
+  font-family: 'Inter', sans-serif;
 }
 
 h1 {
