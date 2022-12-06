@@ -3,7 +3,7 @@ import axios from 'axios'
 import { AppDispatch } from '../store'
 
 import { setArticles, setError, setLoading, setSingleArticle } from './articlesSlice'
-import { logIn, setUserError } from './userSlice'
+import { logIn, setUserError, setUserImage } from './userSlice'
 
 export const fetchArticles = (offset: number, token = '') => {
   return (dispatch: AppDispatch) => {
@@ -51,7 +51,16 @@ export const registerUser = (username: string, email: string, password: string) 
       },
     }).then(
       (data) => {
-        dispatch(logIn(data.data.user))
+        const user = data.data.user
+        dispatch(logIn(user))
+        axios({ method: 'get', url: `https://blog.kata.academy/api/profiles/${user.username}` }).then(
+          (data) => {
+            dispatch(setUserImage(data.data.profile.image))
+          },
+          (err) => {
+            setError(err.message)
+          }
+        )
       },
       (err) => {
         dispatch(setUserError(err.response.data.errors))
@@ -73,10 +82,41 @@ export const looginUser = (email: string, password: string) => {
       },
     }).then(
       (data) => {
-        dispatch(logIn(data.data.user))
+        const user = data.data.user
+        dispatch(logIn(user))
+        axios({ method: 'get', url: `https://blog.kata.academy/api/profiles/${user.username}` }).then(
+          (data) => {
+            dispatch(setUserImage(data.data.profile.image))
+          },
+          (err) => {
+            setError(err.message)
+          }
+        )
       },
       (err) => {
         dispatch(setUserError(err.response.data.errors))
+      }
+    )
+  }
+}
+
+export const updateUserInfo = (data: object, token: string) => {
+  return (dispatch: AppDispatch) => {
+    const url = 'https://blog.kata.academy/api/user'
+    axios({
+      method: 'put',
+      url,
+      headers: { Authorization: token },
+      data: {
+        user: data,
+      },
+    }).then(
+      (data) => {
+        const user = data.data.user
+        dispatch(logIn(user))
+      },
+      (err) => {
+        dispatch(setError(err.message))
       }
     )
   }

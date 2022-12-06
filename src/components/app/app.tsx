@@ -5,6 +5,7 @@ import CardList from '../article-list/article-list'
 import Article from '../article/article'
 import Layout from '../layout/layout'
 import Login from '../login/login'
+import RedactProfile from '../redact-profile/redact-profile'
 import Registration from '../registration/registration'
 
 const App: FC = () => {
@@ -17,6 +18,7 @@ const App: FC = () => {
           <Route path="articles/:slug" element={<Article />} />
           <Route path="sign-up" element={<Registration />} />
           <Route path="sign-in" element={<Login />} />
+          <Route path="profile" element={<RedactProfile />} />
         </Route>
       </Routes>
     </>

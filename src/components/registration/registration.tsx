@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import styles from '../../scss/registration.module.scss'
 import { registerUser } from '../../store/reducers/actionCreators'
@@ -18,15 +18,19 @@ interface FormData {
 
 const Registration: FC = () => {
   const dispatch = useAppDispatch()
-  const { error: registerError } = useAppSelector((state) => state.user)
+  const { error: registerError, user } = useAppSelector((state) => state.user)
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<FormData>({ mode: 'onBlur' })
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (user.username) {
+      navigate('/articles')
+    }
     return () => {
       dispatch(setUserError({}))
     }

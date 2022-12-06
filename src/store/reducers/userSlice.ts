@@ -17,6 +17,7 @@ const initialState: initialUserState = {
     username: '',
     email: '',
     token: '',
+    image: '',
   },
   error: {},
 }
@@ -38,9 +39,12 @@ const userSlice = createSlice({
     setUserError(state, action: PayloadAction<object>) {
       state.error = action.payload
     },
+    setUserImage(state, action: PayloadAction<string>) {
+      state.user.image = action.payload
+    },
   },
 })
 
-export const { logIn, logOut, setUserError } = userSlice.actions
+export const { logIn, logOut, setUserError, setUserImage } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,7 +1,7 @@
 /* eslint-disable no-prototype-builtins */
 import classNames from 'classnames'
 import React, { FC, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import styles from '../../scss/registration.module.scss'
@@ -16,18 +16,22 @@ type FormData = {
 
 const Login: FC = () => {
   const dispatch = useAppDispatch()
-  const { error: loginError } = useAppSelector((state) => state.user)
+  const { error: loginError, user } = useAppSelector((state) => state.user)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ mode: 'onBlur' })
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (user.username) {
+      navigate('/articles')
+    }
     return () => {
       dispatch(setUserError({}))
     }
-  }, [])
+  }, [user])
 
   const onSubmit = (data: FormData) => {
     dispatch(looginUser(data.mail, data.pass))

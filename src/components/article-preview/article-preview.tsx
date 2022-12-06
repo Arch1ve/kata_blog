@@ -43,11 +43,7 @@ const ArticlePreview: FC<ArticlePreviewProps> = ({ data, header }) => {
       </div>
       <div className={styles.description}>
         <div className={styles['description-text']}>
-          <h6 className={styles['profile-title']}>
-            <a className={styles['profile-link']} href="#">
-              {author.username}
-            </a>
-          </h6>
+          <h6 className={styles['profile-title']}>{author.username}</h6>
           <span className={styles.date}>{formatedDate}</span>
         </div>
         <img className={styles['profile-img']} src={author.image} />
