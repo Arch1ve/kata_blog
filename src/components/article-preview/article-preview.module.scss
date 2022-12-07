@@ -75,6 +75,13 @@
 
 .description {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.description-content {
+  display: flex;
+  margin-bottom: 30px;
 }
 
 .description-text {
@@ -99,4 +106,78 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 6px 19px 5px;
+  background-color: $background-color-base;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 22px;
+
+  &--delete {
+    color: $highlight-color;
+    border-color: $highlight-color;
+    margin-right: 13px;
+    cursor: pointer;
+  }
+
+  &--edit {
+    color: $success-color;
+    border-color: $success-color;
+  }
+}
+
+.modal {
+  font-family: "Roboto";
+  position: absolute;
+  width: 240px;
+  height: 100px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  left: 90px;
+  background-color: $background-color-base;
+  font-size: $font-size-base;
+  line-height: 22px;
+}
+
+.modal-text {
+  padding-left: 24px;
+  margin-bottom: 10px;
+  background: url('./img/Vector.svg') no-repeat;
+  background-size: 16px 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 1px 8px;
+  border: 1px solid;
+  border-radius: 4px;
+  height: 24px;
+  cursor: pointer;
+
+  &--no {
+    border-color: #D9D9D9;
+    background-color: $background-color-base;
+    color: #595959;
+    margin-right: 8px;
+  }
+
+  &--yes {
+    border-color: $info-color;
+    background-color: $info-color;
+    color: #fff;
+  }
 }

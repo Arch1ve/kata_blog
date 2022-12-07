@@ -6,6 +6,7 @@ export default interface IArticlePreview {
   tagList: (string | null)[]
   favorited: boolean
   likes: number
+  preview: boolean
   author: {
     username: string
     image: string

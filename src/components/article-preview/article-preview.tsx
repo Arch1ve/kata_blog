@@ -1,11 +1,13 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { format } from 'date-fns'
 import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 
 import IArticlePreview from '../../models/IArticlePreview'
+import { useAppSelector } from '../../hooks/redux'
 
 import styles from './article-preview.module.scss'
+import AcceptModal from './accept-modal'
 
 interface ArticlePreviewProps {
   data: IArticlePreview
@@ -13,8 +15,11 @@ interface ArticlePreviewProps {
 }
 
 const ArticlePreview: FC<ArticlePreviewProps> = ({ data, header }) => {
-  const { title, likes, description, author, date, favorited, tagList, slug } = data
+  const { title, likes, description, author, date, favorited, tagList, slug, preview } = data
+  const { user } = useAppSelector((state) => state.user)
   const formatedDate = format(new Date(date), 'MMMM	d, Y')
+  const [image, setImage] = useState<string>(author.image)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const tags = tagList.map((el, i) => {
     return (
@@ -23,6 +28,18 @@ const ArticlePreview: FC<ArticlePreviewProps> = ({ data, header }) => {
       </li>
     )
   })
+
+  const buttons = (
+    <div className={styles.buttons}>
+      <button className={classnames(styles.btn, styles['btn--delete'])} onClick={() => setIsModalOpen(true)}>
+        Delete
+      </button>
+      {isModalOpen && <AcceptModal setOpen={setIsModalOpen} slug={slug} />}
+      <Link className={classnames(styles.btn, styles['btn--edit'])} to={`/articles/${slug}/edit`}>
+        Edit
+      </Link>
+    </div>
+  )
   return (
     <>
       <div className={styles.content}>
@@ -42,11 +59,20 @@ const ArticlePreview: FC<ArticlePreviewProps> = ({ data, header }) => {
         <p className={styles.text}>{description}</p>
       </div>
       <div className={styles.description}>
-        <div className={styles['description-text']}>
-          <h6 className={styles['profile-title']}>{author.username}</h6>
-          <span className={styles.date}>{formatedDate}</span>
+        <div className={styles['description-content']}>
+          <div className={styles['description-text']}>
+            <h6 className={styles['profile-title']}>{author.username}</h6>
+            <span className={styles.date}>{formatedDate}</span>
+          </div>
+          <img
+            className={styles['profile-img']}
+            src={image}
+            onError={() => {
+              setImage('https://static.productionready.io/images/smiley-cyrus.jpg')
+            }}
+          />
         </div>
-        <img className={styles['profile-img']} src={author.image} />
+        {user.username == author.username && !preview && buttons}
       </div>
     </>
   )

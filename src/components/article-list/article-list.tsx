@@ -30,6 +30,7 @@ const CardList: FC = () => {
         tagList,
         favorited,
         likes,
+        preview: true,
         author: { username: author.username, image: author.image },
       }
       return (

@@ -46,6 +46,7 @@ const Article: FC = () => {
       tagList,
       favorited,
       likes,
+      preview: false,
       author: { username: author.username, image: author.image },
     }
 

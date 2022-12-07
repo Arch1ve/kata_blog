@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { v4 } from 'uuid'
 
-import { useAppSelector } from '../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import styles from '../../scss/registration.module.scss'
+import { setSingleArticle } from '../../store/reducers/articlesSlice'
 import Loader from '../loader/loader'
 
 import ownStyles from './new-article.module.scss'
@@ -24,6 +25,7 @@ interface Tag {
 }
 
 const NewArcticle: FC = () => {
+  const dispatch = useAppDispatch()
   const { currentArticle, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)
   const [tags, setTags] = useState<Tag[]>([])
@@ -64,6 +66,9 @@ const NewArcticle: FC = () => {
         addTag(String(el))
       })
       reset({ title: titleInput, body: bodyInput, description: descriptionInput })
+    }
+    return () => {
+      dispatch(setSingleArticle(null))
     }
   }, [currentArticle])
 
