@@ -18,7 +18,7 @@ const AppHeader: FC = () => {
     </Link>
   )
   const createArticle = username ? (
-    <Link to="/" className={styles.create}>
+    <Link to="new-article" className={styles.create}>
       Create article
     </Link>
   ) : null

@@ -1,0 +1,51 @@
+@import '../../scss/variables.scss';
+
+.wrapper {
+  width: 938px;
+}
+
+.label {
+  &:not(:last-child) {
+    margin-bottom: 21px;
+  }
+}
+
+.textarea {
+  min-height: 168px;
+}
+
+.submit {
+  width: 319px;
+  align-self: flex-start;
+}
+
+.tag {
+  display: flex;
+  margin: 0 0 5px;
+}
+
+.tag-name {
+  width: 300px;
+  margin-right: 17px;
+  font-size: 14px;
+}
+
+.btn {
+  height: 40px;
+  padding: 8px 36px;
+  background-color: $background-color-base;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid;
+
+  &--delete {
+    color: $highlight-color;
+    border-color: $highlight-color;
+  }
+
+  &--add {
+    margin-left: 17px;
+    color: $info-color;
+    border-color: $info-color;
+  }
+}

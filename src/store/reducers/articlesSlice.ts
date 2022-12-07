@@ -14,7 +14,7 @@ const initialState: IArticlesState = {
   articles: [],
   currentArticle: null,
   error: '',
-  loading: true,
+  loading: false,
 }
 
 const articlesSlice = createSlice({
@@ -24,7 +24,7 @@ const articlesSlice = createSlice({
     setArticles(state, action: PayloadAction<IArticle[]>) {
       state.articles = action.payload
     },
-    setSingleArticle(state, action: PayloadAction<IArticle>) {
+    setSingleArticle(state, action: PayloadAction<IArticle | null>) {
       state.currentArticle = action.payload
     },
     setLoading(state, action: PayloadAction<boolean>) {
