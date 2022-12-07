@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import CardList from '../article-list/article-list'
@@ -29,4 +29,4 @@ const App: FC = () => {
   )
 }
 
-export default App
+export default memo(App)

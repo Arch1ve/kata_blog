@@ -5,9 +5,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { v4 } from 'uuid'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { useAppSelector } from '../../hooks/redux'
 import styles from '../../scss/registration.module.scss'
-import { setSingleArticle } from '../../store/reducers/articlesSlice'
 import Loader from '../loader/loader'
 
 import ownStyles from './new-article.module.scss'
@@ -25,7 +24,6 @@ interface Tag {
 }
 
 const NewArcticle: FC = () => {
-  const dispatch = useAppDispatch()
   const { currentArticle, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)
   const [tags, setTags] = useState<Tag[]>([])
@@ -62,13 +60,17 @@ const NewArcticle: FC = () => {
       setTitleInput(currentArticle.title)
       setDescriptionInput(currentArticle.description)
       setBodyInput(currentArticle.body)
+      setTags([])
       currentArticle.tagList.map((el) => {
         addTag(String(el))
       })
       reset({ title: titleInput, body: bodyInput, description: descriptionInput })
-    }
-    return () => {
-      dispatch(setSingleArticle(null))
+    } else {
+      setTitleInput('')
+      setDescriptionInput('')
+      setBodyInput('')
+      setTags([])
+      reset({ title: titleInput, body: bodyInput, description: descriptionInput })
     }
   }, [currentArticle])
 
@@ -90,15 +92,10 @@ const NewArcticle: FC = () => {
       data: {
         article: formated,
       },
-    }).then(
-      (data) => {
-        const slug = data.data.article.slug
-        navigate(`/articles/${slug}`)
-      },
-      (err) => {
-        console.log(err.message)
-      }
-    )
+    }).then((data) => {
+      const slug = data.data.article.slug
+      navigate(`/articles/${slug}`)
+    })
   }
 
   const form = (

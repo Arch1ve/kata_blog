@@ -8,6 +8,7 @@ import { useAppSelector } from '../../hooks/redux'
 
 import styles from './article-preview.module.scss'
 import AcceptModal from './accept-modal'
+import LikeButton from './like-button'
 
 interface ArticlePreviewProps {
   data: IArticlePreview
@@ -47,13 +48,7 @@ const ArticlePreview: FC<ArticlePreviewProps> = ({ data, header }) => {
           <h5 className={styles.title}>
             <Link to={`/articles/${slug}`}>{title}</Link>
           </h5>
-          <button
-            className={classnames(styles.likes, {
-              [styles['likes--unchecked']]: !favorited,
-              [styles['likes--checked']]: favorited,
-            })}
-          ></button>
-          <span className={styles['likes-text']}>{likes}</span>
+          <LikeButton favorited={favorited} slug={slug} likes={likes} />
         </div>
         <ul className={classnames(styles['tag-list'], { [styles['tag-list--article']]: header })}>{tags}</ul>
         <p className={styles.text}>{description}</p>

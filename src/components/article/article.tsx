@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import IArticlePreview from '../../models/IArticlePreview'
 import { fetchSingleArticle } from '../../store/reducers/actionCreators'
-import { setSingleArticle } from '../../store/reducers/articlesSlice'
 import ArticlePreview from '../article-preview/article-preview'
 import Loader from '../loader/loader'
 
@@ -20,9 +19,6 @@ const Article: FC = () => {
   useEffect(() => {
     const token = `Token ${user.token}`
     dispatch(fetchSingleArticle(slug, token))
-    return () => {
-      dispatch(setSingleArticle(null))
-    }
   }, [])
 
   let artcileContent = null
