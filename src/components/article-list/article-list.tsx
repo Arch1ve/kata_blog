@@ -1,5 +1,6 @@
-import { Pagination } from '@mui/material'
+import { Pagination, PaginationItem } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import IArticlePreview from '../../models/IArticlePreview'
@@ -10,14 +11,15 @@ import Loader from '../loader/loader'
 import styles from './article-list.module.scss'
 
 const CardList = () => {
+  const loaction = useLocation()
   const dispatch = useAppDispatch()
   const { articles, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)
-  const [pages, setPages] = useState(0)
+  const [pages, setPages] = useState(parseInt(loaction.search?.split('=')[1]) || 1)
 
   useEffect(() => {
     const token = `Token ${user.token}`
-    dispatch(fetchArticles(pages * 5, token))
+    dispatch(fetchArticles((pages - 1) * 5, token))
   }, [pages])
 
   const items = articles.map(
@@ -45,12 +47,13 @@ const CardList = () => {
       <ul className={styles.list}>{items}</ul>
       <Pagination
         count={10 + pages}
-        page={pages + 1}
+        page={pages}
         shape="rounded"
         color="primary"
         onChange={(_, num) => {
-          setPages(num - 1)
+          setPages(num)
         }}
+        renderItem={(item) => <PaginationItem component={Link} to={`/articles?page=${item.page}`} {...item} />}
       />
     </>
   )
