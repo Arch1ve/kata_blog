@@ -11,16 +11,19 @@ import Loader from '../loader/loader'
 import styles from './article-list.module.scss'
 
 const CardList = () => {
-  const loaction = useLocation()
+  const location = useLocation()
   const dispatch = useAppDispatch()
   const { articles, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)
-  const [pages, setPages] = useState(parseInt(loaction.search?.split('=')[1]) || 1)
+  const [pages, setPages] = useState(parseInt(location.search?.split('=')[1] || '1'))
 
   useEffect(() => {
     const token = `Token ${user.token}`
+    if (!location.search) {
+      setPages(1)
+    }
     dispatch(fetchArticles((pages - 1) * 5, token))
-  }, [pages])
+  }, [pages, location])
 
   const items = articles.map(
     ({ slug, title, description, updatedAt: date, tagList, favorited, favoritesCount: likes, author }) => {
