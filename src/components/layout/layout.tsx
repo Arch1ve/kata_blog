@@ -1,11 +1,11 @@
-import React, { FC, memo } from 'react'
+import React, { memo } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import AppHeader from '../app-header/app-header'
 
 import styles from './layout.module.scss'
 
-const Layout: FC = () => {
+const Layout = () => {
   return (
     <>
       <AppHeader />

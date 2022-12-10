@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
@@ -6,7 +6,7 @@ import { logOut } from '../../store/reducers/userSlice'
 
 import styles from './app-header.module.scss'
 
-const AppHeader: FC = () => {
+const AppHeader = () => {
   const dispatch = useAppDispatch()
   const { username, image } = useAppSelector((state) => state.user.user)
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import classNames from 'classnames'
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
@@ -14,7 +14,7 @@ type FormData = {
   pass: string
 }
 
-const Login: FC = () => {
+const Login = () => {
   const dispatch = useAppDispatch()
   const { error: loginError, user } = useAppSelector((state) => state.user)
   const {

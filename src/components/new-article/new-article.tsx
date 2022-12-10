@@ -1,6 +1,6 @@
 import axios from 'axios'
 import classNames from 'classnames'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { v4 } from 'uuid'
@@ -23,7 +23,7 @@ interface Tag {
   id: string
 }
 
-const NewArcticle: FC = () => {
+const NewArcticle = () => {
   const { currentArticle, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)
   const [tags, setTags] = useState<Tag[]>([])
@@ -41,11 +41,13 @@ const NewArcticle: FC = () => {
   } = useForm<FormData>({ mode: 'onBlur' })
 
   const addTag = (name: string) => {
-    const tag = { name, id: v4() }
-    setTagsInput('')
-    setTags((tags) => {
-      return [...tags, tag]
-    })
+    if (name) {
+      const tag = { name, id: v4() }
+      setTagsInput('')
+      setTags((tags) => {
+        return [...tags, tag]
+      })
+    }
   }
 
   const deleteTag = (id: string) => {

@@ -1,5 +1,5 @@
 import { Pagination } from '@mui/material'
-import React, { useEffect, FC, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import IArticlePreview from '../../models/IArticlePreview'
@@ -9,7 +9,7 @@ import Loader from '../loader/loader'
 
 import styles from './article-list.module.scss'
 
-const CardList: FC = () => {
+const CardList = () => {
   const dispatch = useAppDispatch()
   const { articles, loading } = useAppSelector((state) => state.articles)
   const { user } = useAppSelector((state) => state.user)

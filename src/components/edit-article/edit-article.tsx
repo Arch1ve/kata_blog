@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
@@ -6,7 +6,7 @@ import { fetchSingleArticle } from '../../store/reducers/actionCreators'
 import { setSingleArticle } from '../../store/reducers/articlesSlice'
 import NewArcticle from '../new-article/new-article'
 
-const EditArticle: FC = () => {
+const EditArticle = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state) => state.user)
   const { slug } = useParams<{ slug: string }>()

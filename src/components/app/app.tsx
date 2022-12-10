@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { memo } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import CardList from '../article-list/article-list'
@@ -10,7 +10,7 @@ import NewArcticle from '../new-article/new-article'
 import RedactProfile from '../redact-profile/redact-profile'
 import Registration from '../registration/registration'
 
-const App: FC = () => {
+const App = () => {
   return (
     <>
       <Routes>

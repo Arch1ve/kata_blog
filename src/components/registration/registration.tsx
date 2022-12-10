@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
 import { Link, useNavigate } from 'react-router-dom'
@@ -16,7 +16,7 @@ interface FormData {
   agree: boolean
 }
 
-const Registration: FC = () => {
+const Registration = () => {
   const dispatch = useAppDispatch()
   const { error: registerError, user } = useAppSelector((state) => state.user)
   const {

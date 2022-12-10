@@ -1,16 +1,17 @@
-import React, { FC, memo, useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import IArticlePreview from '../../models/IArticlePreview'
 import { fetchSingleArticle } from '../../store/reducers/actionCreators'
+import { setSingleArticle } from '../../store/reducers/articlesSlice'
 import ArticlePreview from '../article-preview/article-preview'
 import Loader from '../loader/loader'
 
 import styles from './article.module.scss'
 
-const Article: FC = () => {
+const Article = () => {
   const { slug } = useParams<{ slug: string }>()
   const dispatch = useAppDispatch()
   const { loading, currentArticle } = useAppSelector((state) => state.articles)
@@ -19,6 +20,9 @@ const Article: FC = () => {
   useEffect(() => {
     const token = `Token ${user.token}`
     dispatch(fetchSingleArticle(slug, token))
+    return () => {
+      dispatch(setSingleArticle(null))
+    }
   }, [])
 
   let artcileContent = null

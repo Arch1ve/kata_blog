@@ -1,6 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import classNames from 'classnames'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
@@ -15,7 +15,7 @@ type FormData = {
   image: string
 }
 
-const RedactProfile: FC = () => {
+const RedactProfile = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state) => state.user)
   const {
